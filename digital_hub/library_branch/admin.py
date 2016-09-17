@@ -2,7 +2,14 @@ from django.contrib import admin
 
 # Register your models here.
 
-from library_branch.models import Calendar, Event, CalendarRelation, Rule
+from library_branch.models import (
+    Branch,
+    Calendar,
+    CalendarRelation,
+    Event,
+    Rule,
+)
+
 from library_branch.forms import EventAdminForm
 
 
@@ -59,6 +66,12 @@ class RuleAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description')
 
 
+class BranchAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+    fields = ('name', )
+
+
+admin.site.register(Branch, BranchAdmin)
 admin.site.register(Calendar, CalendarAdminOptions)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Rule, RuleAdmin)
