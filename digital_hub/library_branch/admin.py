@@ -10,7 +10,12 @@ from library_branch.models import (
     Rule,
 )
 
+
 from library_branch.forms import EventAdminForm
+
+
+class CalendarInline(admin.TabularInline):
+    model = Calendar
 
 
 class CalendarAdminOptions(admin.ModelAdmin):
@@ -69,6 +74,7 @@ class RuleAdmin(admin.ModelAdmin):
 class BranchAdmin(admin.ModelAdmin):
     list_display = ('name', )
     fields = ('name', )
+    inlines = (CalendarInline, )
 
 
 admin.site.register(Branch, BranchAdmin)
