@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'filer',
+    'mptt',
+    'easy_thumbnails',
+    'calendarium',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +70,10 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.template.context_processors.request',
+)
 
 WSGI_APPLICATION = 'digital_hub.wsgi.application'
 
