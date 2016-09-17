@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-'''
+
 from library_branch.models import Calendar, Event, CalendarRelation, Rule
 from library_branch.forms import EventAdminForm
 
@@ -63,4 +63,3 @@ admin.site.register(Calendar, CalendarAdminOptions)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Rule, RuleAdmin)
 admin.site.register(CalendarRelation, CalendarRelationAdmin)
-'''

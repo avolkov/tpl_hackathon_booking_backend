@@ -16,6 +16,7 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
 from library_branch.settings import USE_FULLCALENDAR
+from library_branch.models.branches import Branch
 
 
 class CalendarManager(models.Manager):
@@ -186,6 +187,8 @@ class Calendar(with_metaclass(ModelBase, *get_model_bases())):
 
     def add_event_url(self):
         return reverse('calendar_create_event', args=[self.slug])
+
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
 
 
 class CalendarRelationManager(models.Manager):
