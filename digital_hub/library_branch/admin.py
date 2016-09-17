@@ -26,6 +26,8 @@ class CalendarAdminOptions(admin.ModelAdmin):
         (None, {
             'fields': [
                 ('name', 'slug'),
+                ('required_good_standing', ),
+                ('required_3d_cert')
             ]
         }),
     )

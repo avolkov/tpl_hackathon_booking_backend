@@ -20,17 +20,19 @@ from library_branch.models.branches import Branch
 
 
 class CalendarManager(models.Manager):
+
     """
     >>> user1 = User(username='tony')
     >>> user1.save()
     """
+
     def get_calendar_for_object(self, obj, distinction=None):
         """
         This function gets a calendar for an object.  It should only return one
         calendar.  If the object has more than one calendar related to it (or
         more than one related to it under a distinction if a distinction is
-        defined) an AssertionError will be raised.  If none are returned it will
-        raise a DoesNotExistError.
+        defined) an AssertionError will be raised.  If none are returned it
+        will raise a DoesNotExistError.
 
         >>> user = User.objects.get(username='tony')
         >>> try:
@@ -51,8 +53,8 @@ class CalendarManager(models.Manager):
         Now if we add one more calendar it should raise an AssertionError
         because there is more than one related to it.
 
-        If you would like to get more than one calendar for an object you should
-        use get_calendars_for_object (see below).
+        If you would like to get more than one calendar for an object you
+        should use get_calendars_for_object (see below).
         >>> calendar = Calendar(name='My 2nd Cal')
         >>> calendar.save()
         >>> calendar.create_relation(user)
@@ -71,11 +73,13 @@ class CalendarManager(models.Manager):
         else:
             return calendar_list[0]
 
-    def get_or_create_calendar_for_object(self, obj, distinction=None, name=None):
+    def get_or_create_calendar_for_object(
+            self, obj, distinction=None, name=None):
         """
         >>> user = User(username="jeremy")
         >>> user.save()
-        >>> calendar = Calendar.objects.get_or_create_calendar_for_object(user, name = "Jeremy's Calendar")
+        >>> calendar = Calendar.objects.get_or_create_calendar_for_object(user,
+            name = "Jeremy's Calendar")
         >>> calendar.name
         "Jeremy's Calendar"
         """
@@ -103,11 +107,15 @@ class CalendarManager(models.Manager):
             dist_q = Q(calendarrelation__distinction=distinction)
         else:
             dist_q = Q()
-        return self.filter(dist_q, calendarrelation__object_id=obj.id, calendarrelation__content_type=ct)
+        return self.filter(
+            dist_q,
+            calendarrelation__object_id=obj.id,
+            calendarrelation__content_type=ct)
 
 
 @python_2_unicode_compatible
 class Calendar(with_metaclass(ModelBase, *get_model_bases())):
+
     '''
     This is for grouping events so that batch relations can be made to all
     events.  An example would be a project calendar.
@@ -167,7 +175,8 @@ class Calendar(with_metaclass(ModelBase, *get_model_bases())):
         if Inheritable is set to true this relation will cascade to all events
         related to this calendar.
         """
-        CalendarRelation.objects.create_relation(self, obj, distinction, inheritable)
+        CalendarRelation.objects.create_relation(
+            self, obj, distinction, inheritable)
 
     def get_recent(self, amount=5):
         """
@@ -177,7 +186,8 @@ class Calendar(with_metaclass(ModelBase, *get_model_bases())):
         amount is the amount of events you want in the queryset. The default is
         5.
         """
-        return self.events.order_by('-start').filter(start__lt=timezone.now())[:amount]
+        return self.events.order_by('-start').filter(
+            start__lt=timezone.now())[:amount]
 
     def occurrences_after(self, date=None):
         return EventListManager(self.events.all()).occurrences_after(date)
@@ -191,10 +201,18 @@ class Calendar(with_metaclass(ModelBase, *get_model_bases())):
         return reverse('calendar_create_event', args=[self.slug])
 
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    required_good_standing = models.BooleanField()
+    required_3d_cert = models.BooleanField()
 
 
 class CalendarRelationManager(models.Manager):
-    def create_relation(self, calendar, content_object, distinction=None, inheritable=True):
+
+    def create_relation(
+            self,
+            calendar,
+            content_object,
+            distinction=None,
+            inheritable=True):
         """
         Creates a relation between calendar and content_object.
         See CalendarRelation for help on distinction and inheritable
@@ -210,11 +228,12 @@ class CalendarRelationManager(models.Manager):
 
 @python_2_unicode_compatible
 class CalendarRelation(with_metaclass(ModelBase, *get_model_bases())):
+
     '''
     This is for relating data to a Calendar, and possible all of the events for
-    that calendar, there is also a distinction, so that the same type or kind of
-    data can be related in different ways.  A good example would be, if you have
-    calendars that are only visible by certain users, you could create a
+    that calendar, there is also a distinction, so that the same type or kind
+    of data can be related in different ways.  A good example would be, if you
+    have calendars that are only visible by certain users, you could create a
     relation between calendars and users, with the distinction of 'visibility',
     or 'ownership'.  If inheritable is set to true, all the events for this
     calendar will inherit this relation.
@@ -223,8 +242,8 @@ class CalendarRelation(with_metaclass(ModelBase, *get_model_bases())):
     content_type: a foreign key relation to ContentType of the generic object
     object_id: the id of the generic object
     content_object: the generic foreign key to the generic object
-    distinction: a string representing a distinction of the relation, User could
-    have a 'veiwer' relation and an 'owner' relation for example.
+    distinction: a string representing a distinction of the relation, User
+    could have a 'veiwer' relation and an 'owner' relation for example.
     inheritable: a boolean that decides if events of the calendar should also
     inherit this relation
 
@@ -232,7 +251,8 @@ class CalendarRelation(with_metaclass(ModelBase, *get_model_bases())):
     may not scale well.  If you use this, keep that in mind.
     '''
 
-    calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE, verbose_name=_("calendar"))
+    calendar = models.ForeignKey(
+        Calendar, on_delete=models.CASCADE, verbose_name=_("calendar"))
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.IntegerField()
     content_object = fields.GenericForeignKey('content_type', 'object_id')

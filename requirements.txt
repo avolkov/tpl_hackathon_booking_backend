@@ -1,4 +1,4 @@
-Django==1.9
+Django==1.9.6
 django-polymorphic==0.8.1
 easy-thumbnails==2.3
 Pillow==3.3.1
