@@ -152,6 +152,8 @@ class Calendar(with_metaclass(ModelBase, *get_model_bases())):
         app_label = 'library_branch'
 
     def __str__(self):
+        if self.branch:
+            return '{}: {}'.format(self.branch.name, self.name)
         return self.name
 
     @property
