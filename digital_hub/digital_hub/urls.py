@@ -17,6 +17,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+admin.site.site_header = 'Digital Hub Resource Manager'
+admin.site.site_title = "Digital Hub Resource Manager"
 urlpatterns = [
     url(r'^library_branch/', include('library_branch.urls')),
     url(r'^admin/', admin.site.urls),
