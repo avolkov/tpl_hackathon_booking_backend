@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.db import models
 
@@ -30,8 +31,8 @@ def calendar_to_json(calendar):
     }
 
 
-def index():
-    return "hello, world!"
+def index(request):
+    return HttpResponse("hello, world!")
 
 
 def branches(request):
