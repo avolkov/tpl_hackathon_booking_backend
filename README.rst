@@ -15,7 +15,20 @@ Requirements: Python 3.5 / Django 1.9 / Postgresql / virtualenvwrapper
 Installation
 ~~~~~~~~~~~~~
 
-Configure postgres and set up database digital_hub; see settings.py / DATABASES
+Simple database setup -- using SQLITE3, replace DATABASES stanza in
+digital_hub/settings.py with this --
+
+..code-block :: python
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'mydatabase',
+        }
+    }
+
+
+If you have database set up use the following
 
 .. code-block :: python
 
@@ -29,6 +42,8 @@ Configure postgres and set up database digital_hub; see settings.py / DATABASES
             'PORT': '5433'
             }
     }
+
+
 
 
 See these instructions on setting up postgres on ubuntu -- https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-16-04
