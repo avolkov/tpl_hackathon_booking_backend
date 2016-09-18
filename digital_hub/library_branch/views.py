@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from django.http import JsonResponse
-
+from django.views.decorators.csrf import csrf_exempt
 from django.db import models
 
 from library_branch.models import Branch, Calendar
@@ -44,3 +44,9 @@ def tools(request):
         "tools": [
             calendar_to_json(calendar) for calendar in Calendar.objects.all()
         ]})
+
+
+@csrf_exempt
+def booking(request):
+    import ipdb; ipdb.set_trace()
+    return JsonResponse({'booking': 'works'})
