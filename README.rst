@@ -16,9 +16,10 @@ Installation
 ~~~~~~~~~~~~~
 
 Simple database setup -- using SQLITE3, replace DATABASES stanza in
-digital_hub/settings.py with this --
+digital_hub/settings.py with this (now default) --
 
-..code-block :: python
+
+.. code-block :: python
 
     DATABASES = {
         'default': {
