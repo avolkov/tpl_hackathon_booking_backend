@@ -81,3 +81,9 @@ Create, run migrations, create admin user, then start the server in development 
 
 Open browser and go to http://127.0.0.1:8000/admin then use username and password
 set when running createsuperuser command.
+
+
+API sketch
+
+.. image::  presentation/API_overview.jpg
+
