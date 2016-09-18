@@ -4,7 +4,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db import models
 
-from library_branch.models import Branch, Calendar
+import json
+from library_branch.models import Branch, Calendar, Event
 # Create your views here.
 
 
@@ -48,5 +49,9 @@ def tools(request):
 
 @csrf_exempt
 def booking(request):
-    import ipdb; ipdb.set_trace()
+    post = request.body
+    post = post.decode('utf-8')
+    data = json.loads(post)
+    calendar = Calendar.objects.filter(id=data['resourceId'])
+    #event = Event
     return JsonResponse({'booking': 'works'})
