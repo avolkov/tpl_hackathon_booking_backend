@@ -32,7 +32,7 @@ def calendar_to_json(calendar):
 
 
 def index(request):
-    return HttpResponse("hello, world!")
+    return render(request, 'library_branch/index.html', {})
 
 
 def branches(request):
