@@ -8,7 +8,7 @@ from django.db.models.base import ModelBase
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
-from schedule.utils import get_model_bases
+from library_branch.utils import get_model_bases
 
 freqs = (("YEARLY", _("Yearly")),
          ("MONTHLY", _("Monthly")),
