@@ -2,3 +2,4 @@ digital_hub/static
 __pycache__
 *.pyc
 *.log
+*.sqlite3

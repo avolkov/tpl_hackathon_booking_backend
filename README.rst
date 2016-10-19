@@ -83,7 +83,17 @@ Open browser and go to http://127.0.0.1:8000/admin then use username and passwor
 set when running createsuperuser command.
 
 
+Running ember and django
+------------------------
+
+Pass the following options to ember in order to communicate with django site on port 8000
+
+.. code-block :: bash
+
+    ember server --proxy http://127.0.0.1:8000
+
 API sketch
 
 .. image::  presentation/API_overview.jpg
+
 
